@@ -1,9 +1,17 @@
 package com.linkshortservice.linkshortservice;
 
+import java.net.URL;
+
 import javax.persistence.Entity;
+
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class UrlClass {
     @Id
     private int urlId; //id короткой ссылки
@@ -33,6 +41,17 @@ public class UrlClass {
         this.origUrl = origUrl;
 
         this.shortUrl = shortUrl; 
-        this.urlId = ShortenerClass.shortUrltoId(shortUrl); //а также проверять не существует ли уже такой
+        //this.urlId = ShortenerClass.shortUrltoId(shortUrl); //а также проверять не существует ли уже такой
+    }
+
+    public static boolean urlIsValid(String url)
+    {
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 }

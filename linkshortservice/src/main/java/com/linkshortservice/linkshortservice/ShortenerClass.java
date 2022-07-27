@@ -25,7 +25,7 @@ public class ShortenerClass {
      * @param shortURL Short url
      * @return Url Id
      */
-    static int shortUrltoId(String shortURL) 
+    /*static UrlClass shortUrltoId(String shortURL) 
     { 
         int urlId = 0; 
       
@@ -43,5 +43,5 @@ public class ShortenerClass {
         } 
 
         return urlId; 
-    } 
+    } */
 }
