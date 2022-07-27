@@ -1,6 +1,11 @@
 package com.linkshortservice.linkshortservice;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class UrlClass {
+    @Id
     private int urlId; //id короткой ссылки
     private String shortUrl;
     private String origUrl;
