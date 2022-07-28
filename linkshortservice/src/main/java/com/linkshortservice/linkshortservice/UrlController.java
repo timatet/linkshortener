@@ -16,8 +16,8 @@ public class UrlController {
     @Autowired
     private  UrlService urlService;
 
-    @GetMapping("/{urlId}")
-    public String getOriglUrl(@PathVariable String shortUrl) {
+    @GetMapping("/{shortUrl}")
+    public String getOriglUrl(@PathVariable("shortUrl") String shortUrl) {
         return urlService.getOriginlUrl(shortUrl);
     }
 
