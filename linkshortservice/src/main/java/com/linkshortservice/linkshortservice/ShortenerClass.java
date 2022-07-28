@@ -6,7 +6,7 @@ public class ShortenerClass {
      * @param urlId Url id
      * @return Short Url
      */
-    static String idToShortUrl(int urlId) 
+    static String idToShortUrl(Integer urlId) 
     { 
         char linkChars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray(); 
         StringBuffer shortUrl = new StringBuffer(); 
@@ -25,7 +25,7 @@ public class ShortenerClass {
      * @param shortURL Short url
      * @return Url Id
      */
-    /*static UrlClass shortUrltoId(String shortURL) 
+    static Integer shortUrltoId(String shortURL) 
     { 
         int urlId = 0; 
       
@@ -43,5 +43,5 @@ public class ShortenerClass {
         } 
 
         return urlId; 
-    } */
+    } 
 }

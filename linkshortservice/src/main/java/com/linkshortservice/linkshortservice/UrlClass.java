@@ -15,25 +15,37 @@ public class UrlClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "url_id")
-    private int urlId; //id короткой ссылки
+    private Integer urlId; //id короткой ссылки
     @Column(name = "short_url")
     private String shortUrl;
     @Column(name = "orig_url")
     private String origUrl;
 
-    public int getUrlId() {
+    public Integer getUrlId() {
         return urlId;
+    }
+        
+    public void setUrlId(Integer urlId) {
+        this.urlId = urlId;
     }
 
     public String getShortUrl() {
         return shortUrl;
+    }
+        
+    public void setShortuRL(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 
     public String getOrigUrl() {
         return origUrl;
     }
 
-    public UrlClass(int urlId, String shortUrl, String origUrl) {
+    public void setOrigUrl(String origUrl) {
+        this.origUrl = origUrl;
+    }
+
+    public UrlClass(Integer urlId, String shortUrl, String origUrl) {
         this.urlId = urlId;
         this.shortUrl = shortUrl;
         this.origUrl = origUrl;
@@ -62,5 +74,14 @@ public class UrlClass {
         catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Url{" +
+                "id=" + urlId +
+                ", fullUrl='" + origUrl + '\'' +
+                ", shortUrl='" + shortUrl + '\'' +
+                '}';
     }
 }

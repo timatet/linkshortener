@@ -22,7 +22,7 @@ public class UrlController {
     }
 
     @PostMapping
-    public UrlClass generateShortUrl(@RequestBody String url) {
+    public String generateShortUrl(@RequestBody String url) {
         return urlService.generateShortUrl(url);
     }
 
