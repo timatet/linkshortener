@@ -60,9 +60,7 @@ public class UrlClass {
     //конструктор для пользовательского url
     public UrlClass(String origUrl, String shortUrl) {
         this.origUrl = origUrl;
-
         this.shortUrl = shortUrl; 
-        //this.urlId = ShortenerClass.shortUrltoId(shortUrl); //а также проверять не существует ли уже такой
     }
 
     public static boolean urlIsValid(String url)
