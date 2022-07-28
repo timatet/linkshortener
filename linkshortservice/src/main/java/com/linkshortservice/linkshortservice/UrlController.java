@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/")
@@ -17,8 +18,11 @@ public class UrlController {
     private  UrlService urlService;
 
     @GetMapping("/{shortUrl}")
-    public String getOriglUrl(@PathVariable("shortUrl") String shortUrl) {
-        return urlService.getOriginlUrl(shortUrl);
+    public RedirectView getOriglUrl(@PathVariable("shortUrl") String shortUrl) {
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(urlService.getOriginlUrl(shortUrl));
+        return redirectView;
+        //return urlService.getOriginlUrl(shortUrl);
     }
 
     @PostMapping
