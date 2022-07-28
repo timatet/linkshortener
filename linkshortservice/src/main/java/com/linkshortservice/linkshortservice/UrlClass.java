@@ -2,20 +2,23 @@ package com.linkshortservice.linkshortservice;
 
 import java.net.URL;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import javax.persistence.Table;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "urls_data")
 public class UrlClass {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) 
+    @Column(name = "url_id")
     private int urlId; //id короткой ссылки
+    @Column(name = "short_url")
     private String shortUrl;
+    @Column(name = "orig_url")
     private String origUrl;
 
     public int getUrlId() {
@@ -30,13 +33,19 @@ public class UrlClass {
         return origUrl;
     }
 
-    public UrlClass(String origUrl) {
+    public UrlClass(int urlId, String shortUrl, String origUrl) {
+        this.urlId = urlId;
+        this.shortUrl = shortUrl;
         this.origUrl = origUrl;
-
-        this.urlId = 12345; //надо заставить генерировать новый !неповторяющийся
-        this.shortUrl = ShortenerClass.idToShortUrl(urlId);
     }
 
+    public UrlClass() {}
+
+    public UrlClass(String origUrl) {
+        this.origUrl = origUrl;
+    }
+
+    //конструктор для пользовательского url
     public UrlClass(String origUrl, String shortUrl) {
         this.origUrl = origUrl;
 
