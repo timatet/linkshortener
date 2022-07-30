@@ -40,21 +40,20 @@ export default{
   name: 'short-url',
   data() {
     return {
-      origUrl: '',
       errors: []
     }
   },
   methods: {
     createShortUrl() {
-      axios.post('http://localhost:8080/', {
-        origUrl: this.origUrl
-      })
+      var self = this;
+      alert(self.origUrl)
+      axios.post('http://localhost:8080/', self.origUrl)
       .then(response => {
         alert(response.data)
       })
       .catch(e => {
         alert(e)
-        this.errors.push(e)
+        self.errors.push(e)
       })
     }
   }
