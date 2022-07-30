@@ -1,5 +1,7 @@
 package com.linkshortservice.linkshortservice;
 
+import java.io.Console;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class UrlService {
     @Autowired
     private UrlRepository urlRepository;
-
 
     public String getOriginlUrl(String id) {
         return urlRepository.findByShortUrl(id);
@@ -28,6 +29,7 @@ public class UrlService {
             System.out.println("Url is not good");
             return null;
         }
+        
 
         UrlClass urlObject = new UrlClass(url); 
         var entity = urlRepository.save(urlObject);
