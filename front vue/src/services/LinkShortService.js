@@ -1,4 +1,4 @@
-import http from '../http-common'
+import http from '../http-common.js'
 
 class LinkShortService {
     getOrigUrl(shortUrl) {
@@ -9,5 +9,4 @@ class LinkShortService {
         return http.post('/', origUrl)
     }
 }
-
 export default new LinkShortService()
