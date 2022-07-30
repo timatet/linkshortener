@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="input-group mb-1 mt-1">
                         <input type="text" v-model="origUrl" class="form-control" placeholder="Enter url" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-primary" v-on:click="createShortUrl" type="button" id="button-addon2">Generate</button>
+                        <button class="btn btn-outline-primary" @click="createShortUrl()" type="button" id="button-addon2">Generate</button>
                       </div>
                 </div>
               </div>
@@ -18,7 +18,7 @@
         <div class="row mt-3 shadow">
           <div class="card">
             <div class="card-body">
-              <div v-if="isUrlGenerated">
+              <div>
                 <h4>Short URL : {{shortUrl}}</h4>
               </div>
               <div v-if="isUrlErrGenerated">
@@ -32,25 +32,35 @@
     </div>
 </template>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 <script>
 import axios from 'axios';
 
 export default{
   name: 'short-url',
+  data() {
+    return {
+      origUrl: '',
+      errors: []
+    }
+  },
   methods: {
-        createShortUrl() {
-          axios.post('http://localhost:8080/', this.origUrl)
-           .then(response => {
-               alert(response.data.id);
-           })
-           .catch(error => {
-               alert('ERROR: ' + error.response.data);
-           })
-        }
+    createShortUrl() {
+      axios.post('http://localhost:8080/', {
+        origUrl: this.origUrl
+      })
+      .then(response => {
+        alert(response.data)
+      })
+      .catch(e => {
+        alert(e)
+        this.errors.push(e)
+      })
+    }
   }
 }
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
