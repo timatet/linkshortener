@@ -46,10 +46,13 @@ export default{
   methods: {
     createShortUrl() {
       var self = this;
+      var urlToSend = self.origUrl;
       alert(self.origUrl)
-      axios.post('http://localhost:8080/', self.origUrl)
+      axios.post('http://localhost:8080/', {
+        url: urlToSend,
+      })
       .then(response => {
-        alert(response.data)
+        alert(response)
       })
       .catch(e => {
         alert(e)
