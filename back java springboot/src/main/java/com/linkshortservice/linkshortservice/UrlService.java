@@ -1,7 +1,5 @@
 package com.linkshortservice.linkshortservice;
 
-import java.io.Console;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;

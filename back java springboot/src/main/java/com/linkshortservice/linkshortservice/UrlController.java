@@ -34,6 +34,12 @@ public class UrlController {
         //return urlService.getOriginlUrl(shortUrl);
     }
 
+    @GetMapping("/geturl/{origUrl}")
+    @ResponseBody
+    public String getShortUrl(@PathVariable("origUrl") String origUrl) {
+        return origUrl;
+    }
+
     @PostMapping
     @RequestMapping(value="/", method=RequestMethod.POST)
     public String generateShortUrl(@RequestBody String url) {
