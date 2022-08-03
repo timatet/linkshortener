@@ -34,30 +34,38 @@
 
 
 <script>
-import axios from 'axios';
+//import axios from 'axios';
+//import LinkShortService from '@/services/LinkShortService';
 
 export default{
-  name: 'short-url',
-  data() {
-    return {
+  data: () => ({
+      origUrl: '',
       errors: []
-    }
-  },
+  }),
+
   methods: {
-    createShortUrl() {
-      var self = this;
-      var urlToSend = self.origUrl;
-      alert(self.origUrl)
-      axios.post('http://localhost:8080/', {
-        url: urlToSend,
+    async createShortUrl() {
+      /*axios.post('http://localhost:8080/', {
+        body: this.origUrl
       })
       .then(response => {
         alert(response)
       })
       .catch(e => {
         alert(e)
-        self.errors.push(e)
+        this.errors.push(e)
+      })*/
+      const res = await fetch('http://localhost:8080/',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            origUrl: this.origUrl
+          }),
       })
+      console.log(res)
     }
   }
 }
