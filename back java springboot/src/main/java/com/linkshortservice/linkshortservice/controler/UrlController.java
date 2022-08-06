@@ -1,4 +1,4 @@
-package com.linkshortservice.linkshortservice;
+package com.linkshortservice.linkshortservice.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.linkshortservice.linkshortservice.service.UrlService;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 @RestController
 @RequestMapping("/")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UrlController {
     @Autowired
     private  UrlService urlService;
-
-    @GetMapping("/")
-    @ResponseBody
-    public String defaultPage() {
-        return "Welcome";
-    }
 
     @GetMapping("/{shortUrl}")
     @ResponseBody
@@ -34,16 +34,12 @@ public class UrlController {
         //return urlService.getOriginlUrl(shortUrl);
     }
 
-    @GetMapping("/geturl/{origUrl}")
-    @ResponseBody
-    public String getShortUrl(@PathVariable("origUrl") String origUrl) {
-        return origUrl;
-    }
-
     @PostMapping
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public String generateShortUrl(@RequestBody String url) {
-        return urlService.generateShortUrl(url);
+    public String generateShortUrl(@RequestBody String url) throws ParseException {
+        Object obj = new JSONParser().parse(url);
+        JSONObject jo = (JSONObject)obj;
+        String origUrl = (String)jo.get("origUrl"); 
+        return urlService.generateShortUrl(origUrl);
     }
-
 }

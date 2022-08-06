@@ -1,9 +1,13 @@
-package com.linkshortservice.linkshortservice;
+package com.linkshortservice.linkshortservice.service;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.linkshortservice.linkshortservice.repository.UrlRepository;
+import com.linkshortservice.linkshortservice.shortener.ShortenerClass;
+import com.linkshortservice.linkshortservice.urlclass.UrlClass;
 
 @Service
 public class UrlService {

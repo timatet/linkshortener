@@ -34,7 +34,7 @@
 
 
 <script>
-//import axios from 'axios';
+import axios from 'axios';
 //import LinkShortService from '@/services/LinkShortService';
 
 export default{
@@ -45,8 +45,10 @@ export default{
 
   methods: {
     async createShortUrl() {
-      /*axios.post('http://localhost:8080/', {
-        body: this.origUrl
+      axios.post('http://localhost:8080/', {
+        body: JSON.stringify({
+            'origUrl': this.origUrl
+          })
       })
       .then(response => {
         alert(response)
@@ -54,18 +56,7 @@ export default{
       .catch(e => {
         alert(e)
         this.errors.push(e)
-      })*/
-      const res = await fetch('http://localhost:8080/',{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          credentials: 'include',
-          body: JSON.stringify({
-            origUrl: this.origUrl
-          }),
       })
-      console.log(res)
     }
   }
 }
