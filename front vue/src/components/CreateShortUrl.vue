@@ -8,9 +8,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="input-group mb-1 mt-1">
-                        <input type="text" v-model="origUrl" class="form-control" placeholder="Enter url" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-primary" @click="createShortUrl()" type="button" id="button-addon2">Generate</button>
-                      </div>
+                        <input type="text" v-model="origUrl" class="form-control" placeholder="Enter original url">
+                    </div>
+                    <div class="input-group mb-1 mt-1">
+                        <input type="text" v-model="shortUrlField" class="form-control" placeholder="Enter short url (only if a specific url needed)">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-primary" @click="createShortUrl()" id="button-addon2">Generate</button>
+                    </div>
                 </div>
               </div>
         </div>
@@ -23,7 +28,7 @@
               </div>
               <div v-show="isUrlErrGenerated">
                 <div class="alert alert-danger" role="alert">
-                    Input url is not good
+                    {{errorMessage}}
                 </div>
               </div>
             </div>
@@ -43,13 +48,15 @@ export default{
       isUrlGoodGenerated: false,
       isUrlErrGenerated: false,
       shortUrl: "",
+      errorMessage: "Input url is not good",
       errors: []
     }
   },
   methods: {
     createShortUrl() {      
       axios.post('http://localhost:8080/', {
-        origUrl: this.origUrl
+        origUrl: this.origUrl,
+        shortUrl: this.shortUrlField
       })
       .then(response => {
         if (response.data == null || response.data == ""){
@@ -66,7 +73,7 @@ export default{
         this.isUrlErrGenerated = true;
         this.errors.push(e)
       })
-    }
+    },
   }  
 }
 </script>
