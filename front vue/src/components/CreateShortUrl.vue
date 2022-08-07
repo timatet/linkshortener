@@ -48,7 +48,7 @@ export default{
       isUrlGoodGenerated: false,
       isUrlErrGenerated: false,
       shortUrl: "",
-      errorMessage: "Input url is not good",
+      errorMessage: "",
       errors: []
     }
   },
@@ -59,18 +59,22 @@ export default{
         shortUrl: this.shortUrlField
       })
       .then(response => {
-        if (response.data == null || response.data == ""){
-          this.isUrlErrGenerated = true;
-          this.isUrlGoodGenerated = false;
-        } else {
+        var respData = JSON.parse(JSON.stringify(response.data));
+        
+        if (respData.res == "true"){
           this.isUrlGoodGenerated = true;
           this.isUrlErrGenerated = false;
-          this.shortUrl = response.data;
+          this.shortUrl = respData.message;
+        } else if (respData.res == "false"){
+          this.isUrlErrGenerated = true;
+          this.isUrlGoodGenerated = false;
+          this.errorMessage = respData.message;
         }
       })
       .catch(e => {
         this.isUrlGoodGenerated = false;
         this.isUrlErrGenerated = true;
+        this.errorMessage = e;
         this.errors.push(e)
       })
     },

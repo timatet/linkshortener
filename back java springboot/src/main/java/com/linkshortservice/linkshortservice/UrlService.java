@@ -24,10 +24,10 @@ public class UrlService {
         return entity.getOrigUrl();
     }
 
-    public String generateShortUrl(String url, String shortUrl) {
+    public String generateShortUrl(String url, String shortUrl) throws InputUrlErrorException {
         if(!UrlClass.urlIsValid(url)) {
-            System.out.println("Url is not good");
-            return null;
+            System.out.println("{ \"res\": \"false\", \"message\": \"Url is not good\" }");
+            return "{ \"res\": \"false\", \"message\": \"Url is not good\" }";
         }
 
         UrlClass urlObject = new UrlClass(url); 
@@ -38,7 +38,7 @@ public class UrlService {
             if (!Strings.isNullOrEmpty(urlRepository.findByShortUrl(shortUrl))){
                 // Если ссылка используется то сообщаем об этом
                 System.out.println("Short Url is used");
-                return null;
+                return "{ \"res\": \"false\", \"message\": \"Short Url is used\" }";
             }
 
             entity = urlRepository.save(urlObject);
@@ -48,6 +48,6 @@ public class UrlService {
         }
 
         urlRepository.setShortUrlById(shortUrl, entity.getUrlId());
-        return shortUrl;
+        return "{ \"res\": \"true\", \"message\": \"" + shortUrl + "\" }";
     }
 }
