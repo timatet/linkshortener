@@ -5,6 +5,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Strings;
+
 @Service
 public class UrlService {
     @Autowired
@@ -22,18 +24,30 @@ public class UrlService {
         return entity.getOrigUrl();
     }
 
-    public String generateShortUrl(String url) {
+    public String generateShortUrl(String url, String shortUrl) {
         if(!UrlClass.urlIsValid(url)) {
             System.out.println("Url is not good");
             return null;
         }
-        
 
         UrlClass urlObject = new UrlClass(url); 
-        var entity = urlRepository.save(urlObject);
-        var shortUrl = ShortenerClass.idToShortUrl(entity.getUrlId());
-        urlRepository.setShortUrlById(shortUrl, entity.getUrlId());
+        UrlClass entity;
 
+        if (!Strings.isNullOrEmpty(shortUrl)){
+            // => Требуется не случайная ссылка
+            if (!Strings.isNullOrEmpty(urlRepository.findByShortUrl(shortUrl))){
+                // Если ссылка используется то сообщаем об этом
+                System.out.println("Short Url is used");
+                return null;
+            }
+
+            entity = urlRepository.save(urlObject);
+        } else {
+            entity = urlRepository.save(urlObject);
+            shortUrl = ShortenerClass.idToShortUrl(entity.getUrlId());
+        }
+
+        urlRepository.setShortUrlById(shortUrl, entity.getUrlId());
         return shortUrl;
     }
 }

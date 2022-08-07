@@ -33,7 +33,6 @@ public class UrlController {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(urlService.getOriginlUrl(shortUrl));
         return redirectView;
-        //return urlService.getOriginlUrl(shortUrl);
     }
 
     @PostMapping
@@ -41,7 +40,8 @@ public class UrlController {
         Object obj = new JSONParser().parse(url);
         JSONObject jo = (JSONObject)obj;
         String origUrl = (String)jo.get("origUrl"); 
-        return urlService.generateShortUrl(origUrl);
-    }
+        String shortUrl = (String)jo.get("shortUrl"); 
 
+        return urlService.generateShortUrl(origUrl, shortUrl);     
+    }
 }
