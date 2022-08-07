@@ -35,33 +35,28 @@
 
 <script>
 import axios from 'axios';
-//import LinkShortService from '@/services/LinkShortService';
 
 export default{
-  data: () => ({
-      origUrl: '',
+  name: 'short-url',
+  data() {
+    return {
       errors: []
-  }),
-
+    }
+  },
   methods: {
-    async createShortUrl() {
+    createShortUrl() {      
       axios.post('http://localhost:8080/', {
-        headers:{
-            "Content-Type": "application/json"
-          },
-        body: JSON.stringify({
-            'origUrl': this.origUrl  
-          })
+        origUrl: this.origUrl
       })
       .then(response => {
-        alert(response)
+        alert(response.data)
       })
       .catch(e => {
         alert(e)
         this.errors.push(e)
       })
     }
-  }
+  }  
 }
 </script>
 

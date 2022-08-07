@@ -1,4 +1,4 @@
-package com.linkshortservice.linkshortservice.shortener;
+package com.linkshortservice.linkshortservice;
 
 public class ShortenerClass {
     /**
@@ -6,7 +6,7 @@ public class ShortenerClass {
      * @param urlId Url id
      * @return Short Url
      */
-    public static String idToShortUrl(Integer urlId) 
+    static String idToShortUrl(Integer urlId) 
     { 
         char linkChars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray(); 
         StringBuffer shortUrl = new StringBuffer(); 
@@ -25,7 +25,7 @@ public class ShortenerClass {
      * @param shortURL Short url
      * @return Url Id
      */
-    public static Integer shortUrltoId(String shortURL) 
+    static Integer shortUrltoId(String shortURL) 
     { 
         int urlId = 0; 
       

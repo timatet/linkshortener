@@ -1,4 +1,4 @@
-package com.linkshortservice.linkshortservice.urlclass;
+package com.linkshortservice.linkshortservice;
 
 import java.net.URL;
 

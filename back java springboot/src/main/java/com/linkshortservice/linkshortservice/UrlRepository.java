@@ -1,13 +1,10 @@
-package com.linkshortservice.linkshortservice.repository;
+package com.linkshortservice.linkshortservice;
 
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import com.linkshortservice.linkshortservice.urlclass.UrlClass;
-
 
 public interface UrlRepository extends JpaRepository<UrlClass, Integer> {
     @Query(value = "select orig_url from urls_data where short_url = ?1", nativeQuery = true)
