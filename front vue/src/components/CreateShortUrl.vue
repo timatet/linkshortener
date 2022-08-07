@@ -47,7 +47,7 @@ export default{
     async createShortUrl() {
       axios.post('http://localhost:8080/', {
         body: JSON.stringify({
-            'origUrl': this.origUrl
+            'origUrl': this.origUrl  
           })
       })
       .then(response => {
