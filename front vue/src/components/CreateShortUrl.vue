@@ -1,7 +1,7 @@
 <template>
   <div class="container">
         <div class="row">
-          <h4 class="text-center text-primary m-3"> Short URL</h4>
+          <h4 class="text-center text-primary m-3">Url Shortener Service</h4>
         </div>
     
         <div class="row shadow mt-3">
@@ -20,7 +20,7 @@
               </div>
         </div>
         
-        <div class="row mt-3 shadow">
+        <div v-show="isUrlGenerated" class="row mt-3 shadow">
           <div class="card">
             <div class="card-body">
               <div v-show="isUrlGoodGenerated">
@@ -45,6 +45,7 @@ export default{
   name: 'short-url',
   data() {
     return {
+      isUrlGenerated: false,
       isUrlGoodGenerated: false,
       isUrlErrGenerated: false,
       shortUrl: "",
@@ -60,22 +61,27 @@ export default{
       })
       .then(response => {
         var respData = JSON.parse(JSON.stringify(response.data));
-        
+        this.isUrlGenerated = true;
+
         if (respData.res == "true"){
           this.isUrlGoodGenerated = true;
           this.isUrlErrGenerated = false;
+
           this.shortUrl = respData.message;
         } else if (respData.res == "false"){
-          this.isUrlErrGenerated = true;
           this.isUrlGoodGenerated = false;
+          this.isUrlErrGenerated = true;
+
           this.errorMessage = respData.message;
         }
       })
       .catch(e => {
+        this.isUrlGenerated = true;
         this.isUrlGoodGenerated = false;
         this.isUrlErrGenerated = true;
+
         this.errorMessage = e;
-        this.errors.push(e)
+        this.errors.push(e);
       })
     },
   }  
