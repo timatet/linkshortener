@@ -46,6 +46,9 @@ export default{
   methods: {
     async createShortUrl() {
       axios.post('http://localhost:8080/', {
+        headers:{
+            "Content-Type": "application/json"
+          },
         body: JSON.stringify({
             'origUrl': this.origUrl  
           })
