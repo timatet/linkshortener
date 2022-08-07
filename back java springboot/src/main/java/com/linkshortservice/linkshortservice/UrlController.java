@@ -36,7 +36,7 @@ public class UrlController {
     }
 
     @PostMapping
-    public String generateShortUrl(@RequestBody String url) throws ParseException, InputUrlErrorException {
+    public String generateShortUrl(@RequestBody String url) throws ParseException {
         Object obj = new JSONParser().parse(url);
         JSONObject jo = (JSONObject)obj;
         String origUrl = (String)jo.get("origUrl"); 

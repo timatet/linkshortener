@@ -24,7 +24,7 @@ public class UrlService {
         return entity.getOrigUrl();
     }
 
-    public String generateShortUrl(String url, String shortUrl) throws InputUrlErrorException {
+    public String generateShortUrl(String url, String shortUrl) {
         if(!UrlClass.urlIsValid(url)) {
             System.out.println("{ \"res\": \"false\", \"message\": \"Url is not good\" }");
             return "{ \"res\": \"false\", \"message\": \"Url is not good\" }";
