@@ -18,10 +18,10 @@
         <div class="row mt-3 shadow">
           <div class="card">
             <div class="card-body">
-              <div>
-                <h4>Short URL : {{shortUrl}}</h4>
+              <div v-show="isUrlGoodGenerated">
+                <h4>Short URL : <a v-bind:href="'http://localhost:8080/' + shortUrl">http://localhost:8080/{{shortUrl}}</a></h4>
               </div>
-              <div v-if="isUrlErrGenerated">
+              <div v-show="isUrlErrGenerated">
                 <div class="alert alert-danger" role="alert">
                     Input url is not good
                 </div>
@@ -40,6 +40,9 @@ export default{
   name: 'short-url',
   data() {
     return {
+      isUrlGoodGenerated: false,
+      isUrlErrGenerated: false,
+      shortUrl: "",
       errors: []
     }
   },
@@ -49,10 +52,18 @@ export default{
         origUrl: this.origUrl
       })
       .then(response => {
-        alert(response.data)
+        if (response.data == null || response.data == ""){
+          this.isUrlErrGenerated = true;
+          this.isUrlGoodGenerated = false;
+        } else {
+          this.isUrlGoodGenerated = true;
+          this.isUrlErrGenerated = false;
+          this.shortUrl = response.data;
+        }
       })
       .catch(e => {
-        alert(e)
+        this.isUrlGoodGenerated = false;
+        this.isUrlErrGenerated = true;
         this.errors.push(e)
       })
     }
