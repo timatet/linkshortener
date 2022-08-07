@@ -7,7 +7,6 @@
 
 <script>
 import ShortUrlCreater from './components/CreateShortUrl.vue'
-
 export default {
   name: 'App',
   components: {
