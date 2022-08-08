@@ -24,7 +24,7 @@
           <div class="card">
             <div class="card-body">
               <div v-show="isUrlGoodGenerated">
-                <h4>Short URL : <a v-bind:href="'http://localhost:8080/' + shortUrl">http://localhost:8080/{{shortUrl}}</a></h4>
+                <h4>Short URL : <a v-bind:href="'http://localhost:8081/' + shortUrl">http://localhost:8081/{{shortUrl}}</a></h4>
               </div>
               <div v-show="isUrlErrGenerated">
                 <div class="alert alert-danger" role="alert">
