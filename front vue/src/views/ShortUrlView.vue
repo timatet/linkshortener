@@ -17,12 +17,12 @@ export default {
     },
     methods:{
         redirectTo: function() {
-            axios.get('http://localhost:8080/' + this.$route.params.shortUrl)
+            axios.get('http://' + this.$root.hostip + ':' + this.$root.srvport + '/' + this.$route.params.shortUrl)
             .then(response => {
                 var respData = JSON.parse(JSON.stringify(response.data));
 
                 if (respData.message == "" || respData.message == "null"){
-                    this.message = "Url http://localhost:8081/" + this.$route.params.shortUrl + " not exist!";
+                    this.message = "Url http://" + this.$root.hostip + ":" + this.$root.webport + "/" + this.$route.params.shortUrl + " not exist!";
                     return;
                 }
 

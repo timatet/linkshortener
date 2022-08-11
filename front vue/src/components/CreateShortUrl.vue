@@ -24,7 +24,8 @@
           <div class="card">
             <div class="card-body">
               <div v-show="isUrlGoodGenerated">
-                <h4>Short URL : <a v-bind:href="'http://localhost:8081/' + shortUrl">http://localhost:8081/{{shortUrl}}</a></h4>
+                <h4>Short URL : <a :href="'http://' + $root.hostip + ':' + $root.webport + '/' + shortUrl + '/'">http://{{$root.hostip}}:{{$root.webport}}/{{shortUrl}}</a>
+                </h4>
               </div>
               <div v-show="isUrlErrGenerated">
                 <div class="alert alert-danger" role="alert">
@@ -55,7 +56,7 @@ export default{
   },
   methods: {
     createShortUrl() {      
-      axios.post('http://localhost:8080/', {
+      axios.post('http://' + this.$root.hostip + ':' + this.$root.srvport + '/', {
         origUrl: this.origUrl,
         shortUrl: this.shortUrlField
       })

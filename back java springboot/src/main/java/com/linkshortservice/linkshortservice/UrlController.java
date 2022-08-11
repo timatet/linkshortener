@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.google.common.base.Strings;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class UrlController {
@@ -31,6 +31,12 @@ public class UrlController {
         String shortUrl = (String)jo.get("shortUrl"); 
 
         return urlService.generateShortUrl(origUrl, shortUrl);     
+    }
+
+    @GetMapping("/")
+    @ResponseBody
+    public String defaultPage() {
+        return "Welcome!";
     }
 
     @GetMapping("/{shortUrl}")
